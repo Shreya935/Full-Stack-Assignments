@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Q5</title>
+</head>
+
+<body onload="getRandomShape();">
+    Response Time: <span id="ms"></span>
+    <div id="shape" onclick="getRandomShape()"></div>
+    <script>
+        var fullWidth = window.innerWidth;
+        var fullHeight = window.innerHeight;
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function getRandomShape() {
+            var ele = document.getElementById('shape');
+            ele.style.position = "absolute";
+
+
+            function Square() {
+                ele.style.width = "100px";
+                ele.style.height = "100px";
+                ele.style.borderRadius = "0%";
+                ele.style.backgroundColor = getRandomColor();
+                ele.style.left = Math.round(Math.random() * (fullWidth - 100)) + "px";
+                ele.style.top = Math.round(Math.random() * (fullHeight - 100)) + "px";
+            }
+
+            function Rectangle() {
+                ele.style.width = "200px";
+                ele.style.height = "100px";
+                ele.style.borderRadius = "0%";
+                ele.style.backgroundColor = getRandomColor();
+                ele.style.left = Math.round(Math.random() * (fullWidth - 200)) + "px";
+                ele.style.top = Math.round(Math.random() * (fullHeight - 100)) + "px";
+            }
+
+            function Circle() {
+                ele.style.width = "100px";
+                ele.style.height = "100px";
+                ele.style.borderRadius = "50%";
+                ele.style.backgroundColor = getRandomColor();
+                ele.style.left = Math.round(Math.random() * (fullWidth - 100)) + "px";
+                ele.style.top = Math.round(Math.random() * (fullHeight - 100)) + "px";
+            }
+
+            var functions = [Square, Circle, Rectangle];
+            var min = 700;
+            var max = 1200;
+            var time = Math.floor(Math.random() * (max - min + 1) + min);
+
+            setTimeout(function () {
+                var index = Math.floor(Math.random() * functions.length);
+                functions[index]();
+            }, time);
+
+            document.getElementById("ms").innerHTML = time + " ms";
+        }
+    </script>
+</body>
+
+</html>
